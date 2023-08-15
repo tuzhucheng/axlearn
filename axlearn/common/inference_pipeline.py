@@ -131,6 +131,8 @@ class InferencePipeline(Module):
                 output_batch=output_batch,
             )
             self.summary_writer(step=batch_index, values=output.summaries)
+            batch_index += 1
+
         self.output_writer.flush()
         # Synchronize flush across hosts.
         multihost_utils.sync_global_devices(self.path())

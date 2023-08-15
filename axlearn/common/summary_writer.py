@@ -148,7 +148,7 @@ class SummaryWriter(BaseWriter):
 
     def __call__(self, step: int, values: Dict[str, Any]):
         cfg = self.config
-        if step % cfg.write_every_n_steps != 0:
+        if (step + 1) % cfg.write_every_n_steps != 0:
             return
         with self.summary_writer.as_default(step=step):
             values = jax.tree_util.tree_map(
